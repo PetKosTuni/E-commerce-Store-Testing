@@ -1,27 +1,13 @@
+sudo: false
+
 language: node_js
+
 node_js:
   - node
 
-env:
-  global:
-  # Code Climate Reporter gotten from code climate
-    - CC_TEST_REPORTER_ID=da1fee3ce1508e9ff73dc6a7481d5ec48a7978765427e1bb05eb4ee46d35af857
-
-
-before_script:
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-
 script:  
   - npm install
-  - npm run test
-
-after_script:  
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-
-after_success:
-  - npm run coverage
-  - npm run coveralls
+  - npm run test:coveralls
 
 notifications:
   email: false
